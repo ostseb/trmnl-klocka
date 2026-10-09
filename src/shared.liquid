@@ -33,10 +33,10 @@
   The "ish": a casual prefix depending on whether we're a bit before, on, or a bit after the
   five-minute mark. Picked by the minute count so it varies between refreshes but is deterministic.
 {%- endcomment -%}
-{%- assign fuzz_before = "Snart|Nästan|Strax|Inte riktigt|Snart typ|Nästan nästan|Snart nog" | split: "|" -%}
+{%- assign fuzz_before = "Snart|Nästan|Strax|Inte riktigt|Nästan nästan|Snart nog" | split: "|" -%}
 {%- assign fuzz_on = "Typ|Runt|Ungefär|Sisådär|Nånstans runt|Cirka|Plus minus|Ish" | split: "|" -%}
-{%- assign fuzz_hour = "Typ prick|Runt|Sisådär|Pang på|Ungefär prick" | split: "|" -%}
-{%- assign fuzz_after = "Nyss|Lite efter|Strax efter|Precis efter|Nyss typ|Redan lite efter" | split: "|" -%}
+{%- assign fuzz_hour = "Typ|Runt|Sisådär|Ungefär|Cirka" | split: "|" -%}
+{%- assign fuzz_after = "Nyss|Lite efter|Strax efter|Redan lite efter" | split: "|" -%}
 {%- assign pick = hh | times: 60 | plus: mm -%}
 {%- if diff < 0 -%}
   {%- assign i = pick | modulo: fuzz_before.size -%}{%- assign fuzz = fuzz_before[i] -%}

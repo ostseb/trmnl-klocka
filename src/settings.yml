@@ -34,13 +34,14 @@ oauth_fixed_expiry_ms: ''
 custom_fields:
 - keyname: about_klocka
   field_type: author_bio
+  github_url: https://github.com/ostseb/trmnl-klocka
   name: Om pluginen
   category: life,humor
   learn_more_url: https://help.trmnl.com/en/articles/12746770-trmnl-is-not-a-clock
   description: |-
     En klocka för e-papper som inte låtsas vara exakt. TRMNL uppdaterar skärmen bara var femte till var femtonde minut, så i stället för en klocka som alltid går fel säger den här ungefär vad klockan är, på vardaglig svenska.
 
-    Tiden avrundas till närmaste fem minuter och får ett skämtsamt prefix som talar om åt vilket håll det lutar: "Typ kvart över fem", "Runt fem i halv åtta", "Nyss fem i fyra", "Snart halv tre", "Nästan nästan tio över sju" eller "Typ prick sex". Formuleringen varierar från gång till gång så att den inte blir tjatig. Under tiden visas veckodag, datum och veckonummer.
+    Tiden avrundas till närmaste fem minuter och får ett skämtsamt prefix som talar om åt vilket håll det lutar: "Typ kvart över fem", "Runt fem i halv åtta", "Nyss fem i fyra", "Snart halv tre", "Nästan nästan tio över sju" eller "Runt sex". Formuleringen varierar från gång till gång så att den inte blir tjatig. Under tiden visas veckodag, datum och veckonummer.
 
     Eftersom bilden står kvar tills nästa uppdatering räknas tiden fram några minuter (inställbart), så att den stämmer så bra som möjligt medan den visas. Välj snabbaste uppdateringsintervallet du har tillgång till. Fungerar i alla fyra layouter och i mashups.
 
