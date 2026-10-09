@@ -2,3 +2,7 @@ preview/*.html
 preview/data.json
 __pycache__/
 *.zip
+preview/*.x.png
+preview/*.portrait.png
+!preview/full.x.png
+!preview/full.portrait.png
