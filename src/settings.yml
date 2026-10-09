@@ -34,6 +34,7 @@ oauth_fixed_expiry_ms: ''
 custom_fields:
 - keyname: about_klocka
   field_type: author_bio
+  github_url: https://github.com/ostseb/trmnl-klocka
   name: Om pluginen
   category: life,humor
   learn_more_url: https://help.trmnl.com/en/articles/12746770-trmnl-is-not-a-clock
