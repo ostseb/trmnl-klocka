@@ -1,0 +1,76 @@
+{%- comment -%}
+  Swedish "ish-time": "Typ kvart över fem", "Runt fem i halv åtta", "Nyss fem i fyra".
+  Rounds to the nearest five minutes; computed at render time.
+{%- endcomment -%}
+{%- assign cf = trmnl.plugin_settings.custom_fields_values -%}
+{%- assign lead = cf.lead_minutes | default: 3 | times: 60 -%}
+{%- assign ts = trmnl.system.timestamp_utc | default: "now" | date: "%s" | plus: trmnl.user.utc_offset | plus: lead -%}
+{%- assign hh = ts | date: "%H" | plus: 0 -%}
+{%- assign mm = ts | date: "%M" | plus: 0 -%}
+{%- assign m5 = mm | divided_by: 5.0 | round | times: 5 -%}
+{%- assign diff = mm | minus: m5 -%}
+{%- assign h = hh -%}
+{%- if m5 >= 25 -%}{%- assign h = hh | plus: 1 -%}{%- endif -%}
+{%- assign h12 = h | modulo: 12 -%}
+{%- assign hour_words = "tolv,ett,två,tre,fyra,fem,sex,sju,åtta,nio,tio,elva" | split: "," -%}
+{%- assign hw = hour_words[h12] -%}
+{%- case m5 -%}
+  {%- when 0 -%}{%- assign phrase = hw -%}
+  {%- when 5 -%}{%- assign phrase = "fem över " | append: hw -%}
+  {%- when 10 -%}{%- assign phrase = "tio över " | append: hw -%}
+  {%- when 15 -%}{%- assign phrase = "kvart över " | append: hw -%}
+  {%- when 20 -%}{%- assign phrase = "tjugo över " | append: hw -%}
+  {%- when 25 -%}{%- assign phrase = "fem i halv " | append: hw -%}
+  {%- when 30 -%}{%- assign phrase = "halv " | append: hw -%}
+  {%- when 35 -%}{%- assign phrase = "fem över halv " | append: hw -%}
+  {%- when 40 -%}{%- assign phrase = "tjugo i " | append: hw -%}
+  {%- when 45 -%}{%- assign phrase = "kvart i " | append: hw -%}
+  {%- when 50 -%}{%- assign phrase = "tio i " | append: hw -%}
+  {%- when 55 -%}{%- assign phrase = "fem i " | append: hw -%}
+  {%- when 60 -%}{%- assign phrase = hw -%}
+{%- endcase -%}
+{%- comment -%}
+  The "ish": a casual prefix depending on whether we're a bit before, on, or a bit after the
+  five-minute mark. Picked by the minute count so it varies between refreshes but is deterministic.
+{%- endcomment -%}
+{%- assign fuzz_before = "Snart|Nästan|Strax|Inte riktigt|Snart typ|Nästan nästan|Snart nog" | split: "|" -%}
+{%- assign fuzz_on = "Typ|Runt|Ungefär|Sisådär|Nånstans runt|Cirka|Plus minus|Ish" | split: "|" -%}
+{%- assign fuzz_hour = "Typ prick|Runt|Sisådär|Pang på|Ungefär prick" | split: "|" -%}
+{%- assign fuzz_after = "Nyss|Lite efter|Strax efter|Precis efter|Nyss typ|Redan lite efter" | split: "|" -%}
+{%- assign pick = hh | times: 60 | plus: mm -%}
+{%- if diff < 0 -%}
+  {%- assign i = pick | modulo: fuzz_before.size -%}{%- assign fuzz = fuzz_before[i] -%}
+{%- elsif diff > 0 -%}
+  {%- assign i = pick | modulo: fuzz_after.size -%}{%- assign fuzz = fuzz_after[i] -%}
+{%- elsif m5 == 0 or m5 == 60 -%}
+  {%- assign i = pick | modulo: fuzz_hour.size -%}{%- assign fuzz = fuzz_hour[i] -%}
+{%- else -%}
+  {%- assign i = pick | modulo: fuzz_on.size -%}{%- assign fuzz = fuzz_on[i] -%}
+{%- endif -%}
+{%- comment -%} "Ish" reads best after the time: "Kvart över fem-ish". {%- endcomment -%}
+{%- if fuzz == "Ish" -%}
+  {%- assign ish_time = phrase | append: "‑ish" | capitalize -%}
+{%- else -%}
+  {%- assign ish_time = fuzz | append: " " | append: phrase -%}
+{%- endif -%}
+{%- assign sv_days = "söndag,måndag,tisdag,onsdag,torsdag,fredag,lördag" | split: "," -%}
+{%- assign sv_months = "x,januari,februari,mars,april,maj,juni,juli,augusti,september,oktober,november,december" | split: "," -%}
+{%- assign wd = ts | date: "%w" | plus: 0 -%}
+{%- assign mo = ts | date: "%m" | plus: 0 -%}
+{%- comment -%} ISO week from day-of-year and ISO weekday (avoids relying on %V). {%- endcomment -%}
+{%- assign doy = ts | date: "%j" | plus: 0 -%}
+{%- assign iso_wd = ts | date: "%u" | plus: 0 -%}
+{%- assign week = doy | minus: iso_wd | plus: 10 | divided_by: 7 -%}
+{%- if week < 1 -%}
+  {%- assign prev = doy | times: 86400 | minus: 0 -%}
+  {%- assign dec31 = ts | minus: prev -%}
+  {%- assign p_doy = dec31 | date: "%j" | plus: 0 -%}{%- assign p_wd = dec31 | date: "%u" | plus: 0 -%}
+  {%- assign week = p_doy | minus: p_wd | plus: 10 | divided_by: 7 -%}
+{%- elsif week == 53 -%}
+  {%- assign year = ts | date: "%Y" -%}
+  {%- assign dec31_wd = year | append: "-12-31" | date: "%u" | plus: 0 -%}
+  {%- if dec31_wd < 4 -%}{%- assign week = 1 -%}{%- endif -%}
+{%- endif -%}
+{%- assign dateline = sv_days[wd] | capitalize | append: " " -%}
+{%- assign day_num = ts | date: "%-d" -%}
+{%- assign dateline = dateline | append: day_num | append: " " | append: sv_months[mo] -%}

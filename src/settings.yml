@@ -1,0 +1,55 @@
+---
+strategy: polling
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: 3.4.0
+serverless_language: ''
+refresh_interval_floor: ''
+polling_url: https://timeapi.io/api/time/current/zone?timeZone=Europe%2FStockholm
+polling_headers: ''
+polling_body: ''
+id: 501030
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
+oauth_authorize_url: ''
+oauth_token_url: ''
+oauth_scopes: ''
+oauth_scope_separator: ''
+oauth_refresh_url: ''
+oauth_auth_params: ''
+oauth_token_headers: ''
+oauth_token_site: ''
+oauth_token_params: ''
+oauth_token_request_auth_method: ''
+oauth_body_format: ''
+oauth_token_response_metadata: ''
+oauth_authorization_method: ''
+oauth_refresh_params: ''
+oauth_token_field_name: ''
+oauth_expiry_field_name: ''
+oauth_expiry_strategy: ''
+oauth_fixed_expiry_ms: ''
+custom_fields:
+- keyname: about_klocka
+  field_type: author_bio
+  name: Om pluginen
+  category: life,humor
+  learn_more_url: https://help.trmnl.com/en/articles/12746770-trmnl-is-not-a-clock
+  description: |-
+    En klocka för e-papper som inte låtsas vara exakt. TRMNL uppdaterar skärmen bara var femte till var femtonde minut, så i stället för en klocka som alltid går fel säger den här ungefär vad klockan är, på vardaglig svenska.
+
+    Tiden avrundas till närmaste fem minuter och får ett skämtsamt prefix som talar om åt vilket håll det lutar: "Typ kvart över fem", "Runt fem i halv åtta", "Nyss fem i fyra", "Snart halv tre", "Nästan nästan tio över sju" eller "Typ prick sex". Formuleringen varierar från gång till gång så att den inte blir tjatig. Under tiden visas veckodag, datum och veckonummer.
+
+    Eftersom bilden står kvar tills nästa uppdatering räknas tiden fram några minuter (inställbart), så att den stämmer så bra som möjligt medan den visas. Välj snabbaste uppdateringsintervallet du har tillgång till. Fungerar i alla fyra layouter och i mashups.
+
+    Svensk "ungefär-tid" för e-papper. Läs varför <a href="https://help.trmnl.com/en/articles/12746770-trmnl-is-not-a-clock" class="underline">TRMNL inte är en klocka</a>.
+- keyname: lead_minutes
+  field_type: number
+  name: Framförhållning (minuter)
+  description: Bilden visas tills nästa uppdatering, så tiden räknas fram så här många minuter (ungefär halva uppdateringsintervallet).
+  default: 3
+name: Ungefär-klocka
+description: Typ kvart över fem
+refresh_interval: 15

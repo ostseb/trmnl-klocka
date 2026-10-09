@@ -1,0 +1,4 @@
+preview/*.html
+preview/data.json
+__pycache__/
+*.zip
