@@ -9,7 +9,7 @@ time_zone: Europe/Stockholm
 
 # Values for the form fields in src/settings.yml, used by `trmnlp serve` previews.
 custom_fields:
-  lead_minutes: "3"
+  lead_minutes: ""
 
 variables:
   trmnl:

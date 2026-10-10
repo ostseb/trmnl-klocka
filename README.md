@@ -10,7 +10,7 @@ Testad i liggande och stående format samt på TRMNL X: [stående](preview/full.
 
 ## Inställningar
 
-- **Framförhållning** – minuter som tiden räknas fram, eftersom bilden står kvar till nästa uppdatering (standard 3)
+- **Framförhållning** – lämna tomt för automatiskt läge: halva pluginens + halva enhetens uppdateringsintervall (15 min när båda är 15 min). Ange ett tal för att styra själv.
 
 ## Installera
 

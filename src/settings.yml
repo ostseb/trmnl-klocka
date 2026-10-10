@@ -43,14 +43,14 @@ custom_fields:
 
     Tiden avrundas till närmaste fem minuter och får ett skämtsamt prefix som talar om åt vilket håll det lutar: "Typ kvart över fem", "Runt fem i halv åtta", "Nyss fem i fyra", "Snart halv tre", "Nästan nästan tio över sju" eller "Runt sex". Formuleringen varierar från gång till gång så att den inte blir tjatig. Under tiden visas veckodag, datum och veckonummer.
 
-    Eftersom bilden står kvar tills nästa uppdatering räknas tiden fram några minuter (inställbart), så att den stämmer så bra som möjligt medan den visas. Välj snabbaste uppdateringsintervallet du har tillgång till. Fungerar i alla fyra layouter och i mashups.
+    Eftersom bilden står kvar tills nästa uppdatering räknas tiden automatiskt fram efter pluginens och enhetens uppdateringsintervall, så att den stämmer så bra som möjligt medan den visas (går också att ställa in för hand). Välj snabbaste uppdateringsintervallet du har tillgång till. Fungerar i alla fyra layouter och i mashups.
 
     Svensk "ungefär-tid" för e-papper. Läs varför <a href="https://help.trmnl.com/en/articles/12746770-trmnl-is-not-a-clock" class="underline">TRMNL inte är en klocka</a>.
 - keyname: lead_minutes
   field_type: number
   name: Framförhållning (minuter)
-  description: Bilden visas tills nästa uppdatering, så tiden räknas fram så här många minuter (ungefär halva uppdateringsintervallet).
-  default: 3
+  description: Lämna tomt för automatiskt läge, där tiden räknas fram halva pluginens plus halva enhetens uppdateringsintervall (15 min med 15-minutersintervall). Ange ett tal för att styra själv.
+  optional: true
 name: Ungefär-klocka
 description: Typ kvart över fem
 refresh_interval: 15
