@@ -1,0 +1,6 @@
+# Terminus (self-hosted TRMNL server) port, read by tools/terminus.py. Not part of the TRMNL plugin.
+# The timeapi.io URL only exists to make TRMNL re-render; Terminus re-renders on its schedule anyway.
+kind: static
+schedule: {interval: 5, unit: minute}
+# Set the device's refresh rate in Terminus to this; the automatic lead time is half of it plus half the schedule.
+device_refresh_seconds: 300
